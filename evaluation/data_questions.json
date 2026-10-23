@@ -1,0 +1,155 @@
+{
+  "source": "Supplied four-contract, thirteen-invoice dataset; source-note interpretations must be labelled as assumptions.",
+  "questions": [
+    {
+      "id": "Q01",
+      "category": "portfolio",
+      "question": "List all four contracts with customer, currency, cadence, start date, entitlements, and amendment relationships."
+    },
+    {
+      "id": "Q02",
+      "category": "portfolio",
+      "question": "How many invoices and credit memos exist? Separate invoices linked to a plan from orphan invoices."
+    },
+    {
+      "id": "Q03",
+      "category": "portfolio",
+      "question": "Show gross invoiced totals by original currency, without mixing EUR and USD."
+    },
+    {
+      "id": "Q04",
+      "category": "portfolio",
+      "question": "Which apparent billing gaps are supported by source facts and which require assumptions?"
+    },
+    {
+      "id": "Q05",
+      "category": "acme",
+      "question": "Summarize the stated 12-month monthly agreement for C-1001 and derive its proposed full contract end."
+    },
+    {
+      "id": "Q06",
+      "category": "acme",
+      "question": "List every existing invoice for C-1001 in issue-date order. Do not invent any invoice IDs."
+    },
+    {
+      "id": "Q07",
+      "category": "acme",
+      "question": "Which issue month is missing between the observed invoices for C-1001? Distinguish issue dates from confirmed service periods."
+    },
+    {
+      "id": "Q08",
+      "category": "acme",
+      "question": "What is the suggested September 2025 correction for C-1001 if USD 8,000 per month and issue-month service allocation are reviewed assumptions?"
+    },
+    {
+      "id": "Q09",
+      "category": "acme",
+      "question": "What are the gross invoiced, paid, and unpaid totals for C-1001? Explain whether unpaid invoices count as billed."
+    },
+    {
+      "id": "Q10",
+      "category": "acme",
+      "question": "Is unpaid invoice I-9010 a missing invoice or a collections issue?"
+    },
+    {
+      "id": "Q11",
+      "category": "acme",
+      "question": "Why should a September-only review use a service period or audit cutoff separately from the full 12-month contract end?"
+    },
+    {
+      "id": "Q12",
+      "category": "acme",
+      "question": "Do monthly Analytics invoice descriptions establish that Support was fully billed? Identify the evidence needed."
+    },
+    {
+      "id": "Q13",
+      "category": "globex",
+      "question": "Explain the relationship between C-1007 and C-1007-A1 and when the amendment takes effect."
+    },
+    {
+      "id": "Q14",
+      "category": "globex",
+      "question": "Can the original C-1007 terms be used to price service after 1 July 2025? Explain the amendment boundary."
+    },
+    {
+      "id": "Q15",
+      "category": "globex",
+      "question": "What can and cannot be concluded about USD 20,000 invoice I-9110 without confirmed quarterly service periods and pricing?"
+    },
+    {
+      "id": "Q16",
+      "category": "globex",
+      "question": "Compare the currency of invoice I-9123 with the currency and stated quarterly target of C-1007-A1."
+    },
+    {
+      "id": "Q17",
+      "category": "globex",
+      "question": "Using the exact 12 September 2025 EUR-to-USD rate, what is EUR 25,000 in USD?"
+    },
+    {
+      "id": "Q18",
+      "category": "globex",
+      "question": "After applying the existing USD 2,000 credit M-300 to I-9123, what is its net billed value in USD?"
+    },
+    {
+      "id": "Q19",
+      "category": "globex",
+      "question": "Does the existing M-300 credit already offset the apparent FX overbilling against the stated USD 25,000 quarterly target? State the assumptions."
+    },
+    {
+      "id": "Q20",
+      "category": "globex",
+      "question": "Would another USD 2,000 credit on I-9123 duplicate an existing adjustment?"
+    },
+    {
+      "id": "Q21",
+      "category": "initech",
+      "question": "Summarize C-1010 and invoice I-9201, including the annual start-date anchor and entitlements."
+    },
+    {
+      "id": "Q22",
+      "category": "initech",
+      "question": "Compare the USD 120,000 contract total with the USD 100,000 invoice. Is USD 20,000 a confirmed shortfall or a candidate requiring coverage and pricing validation?"
+    },
+    {
+      "id": "Q23",
+      "category": "initech",
+      "question": "Does the description Annual base plan prove Analytics and Consulting are both covered? What is missing?"
+    },
+    {
+      "id": "Q24",
+      "category": "initech",
+      "question": "Should the annual service period for C-1010 be anchored to 15 January or to the calendar year?"
+    },
+    {
+      "id": "Q25",
+      "category": "orphan",
+      "question": "Which invoice has no plan reference, and what amount, customer and issue date does it show?"
+    },
+    {
+      "id": "Q26",
+      "category": "orphan",
+      "question": "Can I-9202 be assigned to C-1007-A1 solely because the customer is Globex? What evidence would confirm its allocation?"
+    },
+    {
+      "id": "Q27",
+      "category": "fx",
+      "question": "Which exact FX rates are supplied? What should happen if a required date or currency pair has no rate?"
+    },
+    {
+      "id": "Q28",
+      "category": "review",
+      "question": "What should a September C-1001 proposal show before approval: amount, service period, assumptions, source references, and expected effect?"
+    },
+    {
+      "id": "Q29",
+      "category": "review",
+      "question": "What is the difference between a saved draft needing details and a validated proposal awaiting approval?"
+    },
+    {
+      "id": "Q30",
+      "category": "review",
+      "question": "How can a user approve, reject, verify, and roll back a proposal? Explain only; do not perform any action."
+    }
+  ]
+}

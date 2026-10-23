@@ -1,0 +1,12 @@
+[project]
+name = "revenue-leakage-agent"
+version = "0.1.0"
+description = "Evidence-led conversational billing investigator with a guarded JSON sandbox"
+requires-python = ">=3.11"
+dependencies = ["streamlit", "langgraph", "langgraph-checkpoint-sqlite", "langchain-openai", "pydantic>=2", "python-dotenv", "httpx>=0.28,<1"]
+[project.optional-dependencies]
+test = ["pytest"]
+hosted = ["langgraph-checkpoint-postgres==3.2.0", "psycopg[binary,pool]==3.3.6", "psycopg-pool==3.3.3"]
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

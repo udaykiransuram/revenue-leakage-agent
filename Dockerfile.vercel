@@ -1,0 +1,12 @@
+FROM python:3.12-slim
+WORKDIR /app
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 HOSTED_AUTO_SETUP=1
+COPY requirements.lock requirements.hosted.txt ./
+RUN python -m pip install --no-cache-dir -r requirements.hosted.txt
+# Explicit copies keep local secrets, active records and chat history out.
+COPY app.py ./
+COPY leakage ./leakage
+COPY data ./data
+COPY .streamlit/config.toml ./.streamlit/config.toml
+EXPOSE 80
+CMD ["python", "-m", "leakage.hosted", "serve"]

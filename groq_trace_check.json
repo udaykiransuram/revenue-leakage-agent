@@ -1,0 +1,50 @@
+{
+  "provider": "groq",
+  "tools": [
+    "load_plan"
+  ],
+  "response": "The plan **C\u20111001** is for **ACME Corp**, with a **total value of\u202f96,000\u202fUSD**, billed **monthly**.",
+  "seconds": 1.4,
+  "trace": [
+    {
+      "run_id": "a21c45e818e94d14ab00b5423c4d0d3f",
+      "step": 1,
+      "kind": "model",
+      "name": "groq",
+      "status": "success",
+      "at": "2026-10-23T10:25:46.491024+00:00",
+      "duration_seconds": 0.816,
+      "summary": "Model response returned. Requested 1 tool call(s).",
+      "input_tokens": 1341,
+      "output_tokens": 42
+    },
+    {
+      "run_id": "a21c45e818e94d14ab00b5423c4d0d3f",
+      "step": 2,
+      "kind": "tool",
+      "name": "load_plan",
+      "status": "success",
+      "at": "2026-10-23T10:25:46.509761+00:00",
+      "duration_seconds": 0.001,
+      "summary": "Returned a structured result.",
+      "input_summary": "Argument fields: plan_id",
+      "source_refs": []
+    },
+    {
+      "run_id": "a21c45e818e94d14ab00b5423c4d0d3f",
+      "step": 3,
+      "kind": "model",
+      "name": "groq",
+      "status": "success",
+      "at": "2026-10-23T10:25:47.054536+00:00",
+      "duration_seconds": 0.544,
+      "summary": "Model response returned.",
+      "input_tokens": 1456,
+      "output_tokens": 37
+    }
+  ],
+  "financial_revision": 0,
+  "conversation": "92a8ec77-f74c-490a-91c2-39e83cf535ae",
+  "passed": true,
+  "review": "Actual model-tool-model execution trace persisted; source plan fields match supplied records; financial revision unchanged."
+}

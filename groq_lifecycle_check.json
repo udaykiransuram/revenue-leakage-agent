@@ -1,0 +1,135 @@
+{
+  "turns": [
+    {
+      "prompt": "Please investigate plan C-1001 through October 2025. Tell me what evidence is missing before any correction can be proposed.",
+      "seconds": 6.67,
+      "reply": "**Missing evidence needed before any correction can be proposed for plan\u202fC\u20111001 (through\u202fOct\u202f2025)**  \n\n| Evidence type | Why it\u2019s required | What the reconciliation engine flagged |\n|---|---|---|\n| **Confirmed contract term / end date** | The plan record only shows a start date (2025\u201101\u201101) and a total\u2011value note. The audit cannot know the official contract end (or renewal) date, so it cannot determine how many months should be billed. | `missing_contract_context` \u2013 needs \u201cconfirmed contract term/end date\u201d and \u201cper\u2011period price and commercial effective dates\u201d. |\n| **Per\u2011period price (monthly charge) and effective dates** | The note \u201c~\u202f8\u202f000\u202fUSD per month\u201d is unverified. The audit must have a definitive monthly price (or a schedule) to compare against invoices. | Same as above \u2013 per\u2011period price is required. |\n| **Invoice\u2011to\u2011service\u2011period mapping** | Invoices are identified only by issue dates. The audit needs the exact service start/end dates each invoice covers (e.g., Jan\u202f1\u2013Jan\u202f31, etc.) to detect missing or mis\u2011aligned months. | `missing_service_periods` \u2013 needs \u201cinvoice service\u2011period mapping\u201d. |\n| **Entitlement allocation per invoice** | The plan includes two entitlements (Analytics, Support). The audit must confirm each invoice billed for the correct entitlement(s) and that no entitlement was omitted or double\u2011billed. | Same finding \u2013 also needs \u201cproduct/entitlement allocation\u201d. |\n| **Confirmation of pricing assumptions** | The reconciliation currently assumes the issue month equals the service month and that one invoice is issued per month. Those assumptions must be explicitly validated (or corrected) before any make\u2011good or credit can be drafted. | `candidate_missing_issue_month` \u2013 assumptions listed but unverified. |\n\n**What\u2019s next?**  \nProvide the missing pieces (contract end date, official monthly price, a mapping of each invoice ID\u202f\u2192\u202fservice period, and entitlement coverage). Once these are supplied and confirmed via a billing\u2011context proposal, the system can recompute the expected billing through October\u202f2025 and identify any under\u2011 or over\u2011billing that could be corrected.",
+      "tools": [
+        "list_plans",
+        "load_plan",
+        "reconcile_plan"
+      ],
+      "pending": [],
+      "revision": 0,
+      "invoice_count": 13
+    },
+    {
+      "prompt": "Confirmed: C-1001 runs January 1, 2025 through December 31, 2025, with exclusive end January 1, 2026. The price is exactly 8000 USD monthly for Analytics and Support together. Each existing invoice covers the full calendar month of its issue date. No proration. Use invoice issue date for FX. Audit only completed periods through October 31, 2025 (exclusive cutoff November 1), without shortening the contract. Please prepare the billing-context proposal for review; do not apply anything.",
+      "seconds": 0.17,
+      "reply": "Groq's request limit was reached. Retry later; no paid or local-model fallback was attempted. Your conversation and pending proposals are saved. No action was approved by this failure.",
+      "tools": [],
+      "pending": [],
+      "revision": 0,
+      "invoice_count": 13
+    },
+    {
+      "prompt": "Please continue with the confirmed billing context in my previous message and prepare its review proposal. Keep your response brief.",
+      "seconds": 2.08,
+      "reply": "Groq's request limit was reached. Retry later; no paid or local-model fallback was attempted. Your conversation and pending proposals are saved. No action was approved by this failure.",
+      "tools": [
+        "propose_billing_context",
+        "query_invoices"
+      ],
+      "pending": [],
+      "revision": 0,
+      "invoice_count": 13
+    },
+    {
+      "prompt": "Continue preparing the billing-context proposal using the invoice records you retrieved and my confirmed terms. Keep your reply brief.",
+      "seconds": 1.9,
+      "reply": "Groq's request limit was reached. Retry later; no paid or local-model fallback was attempted. Your conversation and pending proposals are saved. No action was approved by this failure.",
+      "tools": [
+        "propose_billing_context"
+      ],
+      "pending": [],
+      "revision": 0,
+      "invoice_count": 13
+    },
+    {
+      "prompt": "Continue preparing the billing-context proposal from my confirmed terms and the invoice records already retrieved. Do not apply it.",
+      "seconds": 1.85,
+      "reply": "The Groq request failed. Check the free-plan key, model access and connectivity. No local-model fallback was attempted. Your conversation and pending proposals are saved. No action was approved by this failure.",
+      "tools": [],
+      "pending": [],
+      "revision": 0,
+      "invoice_count": 13
+    },
+    {
+      "prompt": "Continue preparing the context review proposal. Do not apply anything.",
+      "seconds": 1.77,
+      "reply": "Do you approve proposal PROP-481bb3e86455:1 as displayed below? Say yes or use its Approve button.",
+      "tools": [
+        "propose_billing_context"
+      ],
+      "pending": [
+        {
+          "kind": "billing_context",
+          "amount": null,
+          "period": null,
+          "change_set": {
+            "period_amount": "8000.00",
+            "term_end": "2026-01-01",
+            "invoice_periods": {
+              "I-9001": [
+                "2025-01-01",
+                "2025-02-01"
+              ],
+              "I-9002": [
+                "2025-02-01",
+                "2025-03-01"
+              ],
+              "I-9003": [
+                "2025-03-01",
+                "2025-04-01"
+              ],
+              "I-9004": [
+                "2025-04-01",
+                "2025-05-01"
+              ],
+              "I-9005": [
+                "2025-05-01",
+                "2025-06-01"
+              ],
+              "I-9006": [
+                "2025-06-01",
+                "2025-07-01"
+              ],
+              "I-9007": [
+                "2025-07-01",
+                "2025-08-01"
+              ],
+              "I-9008": [
+                "2025-08-01",
+                "2025-09-01"
+              ],
+              "I-9010": [
+                "2025-10-01",
+                "2025-11-01"
+              ]
+            },
+            "proration": "none",
+            "fx_date_policy": "invoice_issue_date",
+            "entitlement_scope": "all_plan_entitlements",
+            "source_fingerprint": "3d0935192252fc5c7c011de67fc80170d0605bb911dcd0a21427d7712bfa1e32",
+            "plan_id": "C-1001"
+          }
+        }
+      ],
+      "revision": 0,
+      "invoice_count": 13
+    },
+    {
+      "prompt": "reject",
+      "seconds": 0.01,
+      "reply": "Proposal rejected. Billing records are unchanged.",
+      "tools": [],
+      "pending": [],
+      "revision": 0,
+      "invoice_count": 13
+    }
+  ],
+  "dataset": "supplied challenge records; isolated sandbox",
+  "live_model": "openai/gpt-oss-120b",
+  "passed": false,
+  "status": "Partial live acceptance: source investigation and typed proposal creation exercised. Rate limits interrupted turns. Reviewer rejected context proposal because it omitted explicitly requested audit cutoff. No context approval, financial application, or rollback exercised live."
+}

@@ -1,0 +1,74 @@
+{
+  "validation": "real local Ollama model with real tools, synthetic records",
+  "model": "qwen3:8b",
+  "cases": [
+    {
+      "request": "Investigate billing discrepancies for plan P-12345. Use the reconciliation tool to verify the expected and actual amounts for every service period.",
+      "response": "The reconciliation for plan **P-12345** shows the following findings:\n\n| Period       | Expected Amount | Actual Amount | Discrepancy | Status     | Supported Corrections |\n|--------------|------------------|----------------|-------------|------------|------------------------|\n| 2024-09-01   | $10,000.00       | $10,000.00    | $0.00       | Matched    | None                   |\n| 2024-10-01   | $10,000.00       | $0.00         | $10,000.00  | Missing    | Make good             |\n| 2024-11-01   | $10,000.00       | $10,000.00    | $0.00       | Matched    | None                   |\n\n### Summary:\n- **Total Discrepancy**: $10,000.00 USD (missing in the period 2024-10-01 to 2024-11-01).\n- **Action Required**: A make-good invoice is needed to recover the missing revenue for the period 2024-10-01 to 2024-11-01.\n\nWould you like to proceed with drafting a make-good invoice for the missing amount?",
+      "tools": [
+        "reconcile_plan"
+      ],
+      "latency_seconds": 24.961,
+      "revision": 0
+    },
+    {
+      "request": "What currency is that plan in?",
+      "response": "The plan **P-12345** is in **USD** (United States Dollars).",
+      "tools": [],
+      "latency_seconds": 6.1,
+      "revision": 0
+    },
+    {
+      "request": "Please propose a make-good invoice for the missing October 2024 service period. Do not apply it yet.",
+      "response": "Do you approve proposal PROP-3f56baf841b6:1 as displayed below? Say yes or use its Approve button.",
+      "tools": [
+        "propose_make_good_invoice"
+      ],
+      "latency_seconds": 17.476,
+      "revision": 0
+    },
+    {
+      "request": "approve PROP-3f56baf841b6:1",
+      "response": "**Make-good invoice applied \u00b7 10000.00 USD \u00b7 2024-10-01 to 2024-11-01.** Receipt: ACT-ef1aa086c3a6. Verification found 0 remaining issue(s) for P-12345. Details are available in the evidence and receipts below.",
+      "tools": [],
+      "latency_seconds": 0.01,
+      "revision": 1
+    },
+    {
+      "request": "Check the same plan again. Did the correction resolve the missing period? Use fresh reconciliation results.",
+      "response": "The reconciliation for plan **P-12345** now shows that the missing period **October 2024** has been resolved:\n\n| Period       | Expected Amount | Actual Amount | Discrepancy | Status     | Supported Corrections |\n|--------------|------------------|----------------|-------------|------------|------------------------|\n| 2024-09-01   | $10,000.00       | $10,000.00    | $0.00       | Matched    | None                   |\n| 2024-10-01   | $10,000.00       | $10,000.00    | $0.00       | Matched    | None                   |\n| 2024-11-01   | $10,000.00       | $10,000.00    | $0.00       | Matched    | None                   |\n\n### Summary:\n- **Total Discrepancy**: $0.00 USD (no discrepancies found).\n- **Resolution**: The missing revenue for the service period **October 2024** has been successfully recovered via the make-good invoice.\n\nThe correction has resolved the missing period. Is there anything else you need assistance with?",
+      "tools": [
+        "reconcile_plan"
+      ],
+      "latency_seconds": 26.706,
+      "revision": 1
+    },
+    {
+      "request": "Please prepare a rollback proposal for the latest correction, and wait for approval.",
+      "response": "Do you approve proposal PROP-607c8c99d8ce:1 as displayed below? Say yes or use its Approve button.",
+      "tools": [
+        "request_rollback"
+      ],
+      "latency_seconds": 31.323,
+      "revision": 1
+    },
+    {
+      "request": "approve PROP-607c8c99d8ce:1",
+      "response": "**Rollback applied \u00b7 2024-10-01 to 2024-11-01.** Receipt: ACT-cfe071047516. Verification found 1 remaining issue(s) for P-12345. Details are available in the evidence and receipts below.",
+      "tools": [],
+      "latency_seconds": 0.03,
+      "revision": 2
+    }
+  ],
+  "limitations": [
+    "Synthetic input, not actual sponsor data",
+    "Does not validate sponsor model quality"
+  ],
+  "passed": true,
+  "model_usage": {
+    "input_tokens": 30892,
+    "output_tokens": 1077,
+    "total_tokens": 31969
+  },
+  "total_latency_seconds": 106.699
+}

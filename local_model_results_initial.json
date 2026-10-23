@@ -1,0 +1,74 @@
+{
+  "validation": "real local Ollama model with real tools, synthetic records",
+  "model": "qwen3:8b",
+  "cases": [
+    {
+      "request": "Investigate billing discrepancies for plan P-12345. Use the reconciliation tool to verify the expected and actual amounts for every service period.",
+      "response": "The reconciliation for plan **P-12345** has identified the following discrepancies:\n\n### Summary of Findings\n| Period       | Expected | Actual | Discrepancy | Status     | Supported Corrections |\n|--------------|----------|--------|-------------|------------|------------------------|\n| 2024-09-01   | $10,000.00 | $10,000.00 | $0.00       | Matched    | None                   |\n| 2024-10-01   | $10,000.00 | $0.00     | $10,000.00  | Missing    | Make Good              |\n| 2024-11-01   | $10,000.00 | $10,000.00 | $0.00       | Matched    | None                   |\n\n### Detailed Findings\n\n#### 1. **Period: 2024-09-01 to 2024-10-01**\n- **Expected:** $10,000.00 USD\n- **Actual:** $10,000.00 USD\n- **Discrepancy:** $0.00\n- **Status:** Matched\n- **Calculation:** Expected: $10,000.00 \u00d7 (1 - 0/100) \u00d7 30/30 = $10,000.00 USD. Actual: INV-SEP: net $10,000.00 USD \u00d7 1 = $10,000.00 USD.\n- **Assumptions:** Period end dates are exclusive, only explicit contract rules used.\n\n#### 2. **Period: 2024-10-01 to 2024-11-01**\n- **Expected:** $10,000.00 USD\n- **Actual:** $0.00 USD\n- **Discrepancy:** $10,000.00 USD\n- **Status:** Missing\n- **Calculation:** Expected: $10,000.00 \u00d7 (1 - 0/100) \u00d7 31/31 = $10,000.00 USD. Actual: No matching invoices.\n- **Supported Corrections:** Make Good\n- **Assumptions:** Period end dates are exclusive, only explicit contract rules used.\n\n#### 3. **Period: 2024-11-01 to 2024-12-01**\n- **Expected:** $10,000.00 USD\n- **Actual:** $10,000.00 USD\n- **Discrepancy:** $0.00\n- **Status:** Matched\n- **Calculation:** Expected: $10,000.00 \u00d7 (1 - 0/100) \u00d7 30/30 = $10,000.00 USD. Actual: INV-NOV: net $10,000.00 USD \u00d7 1 = $10,000.00 USD.\n- **Assumptions:** Period end dates are exclusive, only explicit contract rules used.\n\n### Next Steps\n- For the **missing period (2024-10-01 to 2024-11-01)**, we can propose a **make-good invoice** to recover the missing revenue.\n- If you would like to proceed with a make-good invoice, please confirm the details, and I will draft the proposal.",
+      "tools": [
+        "reconcile_plan"
+      ],
+      "latency_seconds": 36.699,
+      "revision": 0
+    },
+    {
+      "request": "What currency is that plan in?",
+      "response": "The plan **P-12345** is in **USD** (United States Dollars).",
+      "tools": [],
+      "latency_seconds": 6.792,
+      "revision": 0
+    },
+    {
+      "request": "Please propose a make-good invoice for the missing October 2024 service period. Do not apply it yet.",
+      "response": "Do you approve proposal PROP-5f2f370986b4:1 as displayed below? Say yes or use its Approve button.",
+      "tools": [
+        "propose_make_good_invoice"
+      ],
+      "latency_seconds": 29.8,
+      "revision": 0
+    },
+    {
+      "request": "approve PROP-5f2f370986b4:1",
+      "response": "**Make-good invoice applied \u00b7 10000.00 USD \u00b7 2024-10-01 to 2024-11-01.** Receipt: ACT-15ed608e7d01. Verification found 0 remaining issue(s) for P-12345. Details are available in the evidence and receipts below.",
+      "tools": [],
+      "latency_seconds": 0.01,
+      "revision": 1
+    },
+    {
+      "request": "Check the same plan again. Did the correction resolve the missing period? Use fresh reconciliation results.",
+      "response": "The reconciliation for plan **P-12345** has been updated and confirms that the missing period **October 2024 (2024-10-01 to 2024-11-01)** has been resolved.\n\n### Summary of Reconciliation Results\n| Period       | Expected | Actual | Discrepancy | Status     | Supported Corrections |\n|--------------|----------|--------|-------------|------------|------------------------|\n| 2024-09-01   | $10,000.00 | $10,000.00 | $0.00       | Matched    | None                   |\n| 2024-10-01   | $10,000.00 | $10,000.00 | $0.00       | Matched    | None                   |\n| 2024-11-01   | $10,000.00 | $10,000.00 | $0.00       | Matched    | None                   |\n\n### Detailed Findings\n\n#### 1. **Period: 2024-09-01 to 2024-10-01**\n- **Expected:** $10,000.00 USD\n- **Actual:** $10,000.00 USD\n- **Discrepancy:** $0.00\n- **Status:** Matched\n- **Calculation:** Expected: $10,000.00 \u00d7 (1 - 0/100) \u00d7 30/30 = $10,000.00 USD. Actual: INV-SEP: net $10,000.00 USD \u00d7 1 = $10,000.00 USD.\n- **Assumptions:** Period end dates are exclusive, only explicit contract rules used.\n\n#### 2. **Period: 2024-10-01 to 2024-11-01**\n- **Expected:** $10,000.00 USD\n- **Actual:** $10,000.00 USD\n- **Discrepancy:** $0.00\n- **Status:** Matched\n- **Calculation:** Expected: $10,000.00 \u00d7 (1 - 0/100) \u00d7 31/31 = $10,000.00 USD. Actual: INV-MG-15ed608e7d01: net $10,000.00 USD \u00d7 1 = $10,000.00 USD.\n- **Assumptions:** Period end dates are exclusive, only explicit contract rules used.\n\n#### 3. **Period: 2024-11-01 to 2024-12-01**\n- **Expected:** $10,000.00 USD\n- **Actual:** $10,000.00 USD\n- **Discrepancy:** $0.00\n- **Status:** Matched\n- **Calculation:** Expected: $10,000.00 \u00d7 (1 - 0/100) \u00d7 30/30 = $10,000.00 USD. Actual: INV-NOV: net $10,000.00 USD \u00d7 1 = $10,000.00 USD.\n- **Assumptions:** Period end dates are exclusive, only explicit contract rules used.\n\n### Conclusion\nThe make-good invoice for the missing period **October 2024 (2024-10-01 to 2024-11-01)** has successfully resolved the discrepancy. The actual revenue now matches the expected revenue for this period. No further action is required for this plan.",
+      "tools": [
+        "reconcile_plan"
+      ],
+      "latency_seconds": 49.975,
+      "revision": 1
+    },
+    {
+      "request": "Please prepare a rollback proposal for the latest correction, and wait for approval.",
+      "response": "Do you approve proposal PROP-a487ebeef0d7:1 as displayed below? Say yes or use its Approve button.",
+      "tools": [
+        "request_rollback"
+      ],
+      "latency_seconds": 83.466,
+      "revision": 1
+    },
+    {
+      "request": "approve PROP-a487ebeef0d7:1",
+      "response": "**Rollback applied \u00b7 2024-10-01 to 2024-11-01.** Receipt: ACT-4aefb490c3c7. Verification found 1 remaining issue(s) for P-12345. Details are available in the evidence and receipts below.",
+      "tools": [],
+      "latency_seconds": 0.02,
+      "revision": 2
+    }
+  ],
+  "limitations": [
+    "Synthetic input, not actual sponsor data",
+    "Does not validate sponsor model quality"
+  ],
+  "passed": true,
+  "model_usage": {
+    "input_tokens": 45642,
+    "output_tokens": 2642,
+    "total_tokens": 48284
+  },
+  "total_latency_seconds": 206.844
+}

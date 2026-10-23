@@ -1,0 +1,19 @@
+{
+  "provider": "groq",
+  "dataset": "supplied challenge records",
+  "tools": [
+    "reconcile_plan"
+  ],
+  "response": "**Invoice\u202fI\u20119123 (plan\u202fC\u20111007\u2011A1)**  \n\n| Item | Value |\n|------|-------|\n| Original amount | **\u20ac\u202f25\u202f000** (paid) |\n| Converted to USD (issue\u2011date FX\u202f1.08) | **$\u202f27\u202f000** |\n| Existing credit memo | **$\u202f2\u202f000** (M\u2011300) |\n| Net billed amount (USD) | **$\u202f25\u202f000** \u2013 this is the amount recorded after credit; it is *not* an outstanding payable. |\n\n*Source:* reconciliation finding\u202fSRC\u2011b3cfc37b2f43ab23 (invoice totals) and SRC\u201175fc90aa98c0925e (FX conversion, credit details)\u3010SRC\u2011b3cfc37b2f43ab23, SRC\u201175fc90aa98c0925e\u3011.\n\n**Credit\u2011ability:** The plan lacks confirmed contract term/end\u2011date and per\u2011period pricing (missing_contract_context\u202fSRC\u201182d65bab\u2026\u200b). Because the contract context is unresolved, we cannot determine whether additional credit is justified. No further credit can be recommended until the contract terms are clarified.",
+  "seconds": 3.82,
+  "financial_revision": 0,
+  "receipts": 0,
+  "usage": {
+    "input_tokens": 3651,
+    "output_tokens": 386,
+    "total_tokens": 4037
+  },
+  "conversation": "07e161e5-a649-41fb-9e2e-a71c55b37681",
+  "review_status": "passed: original EUR amount, exact issue-date FX, USD credit, net billed versus paid status, and unresolved-context limitation checked against supplied records",
+  "passed": true
+}

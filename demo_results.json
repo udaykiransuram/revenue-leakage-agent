@@ -1,0 +1,116 @@
+{
+  "mode": "offline-scripted, real tools and persistence",
+  "conversation": "b6aa063a-a5a3-4528-be1e-5681b73d2007",
+  "revision_after_apply": 1,
+  "revision_after_rollback": 2,
+  "transcript": [
+    {
+      "user": "Check P-12345",
+      "assistant": "F-1625bbbd6afb6c8d: missing period \u00b7 10000.00 USD \u00b7 2024-10-01 to 2024-11-01 \u00b7 validated"
+    },
+    {
+      "user": "What currency is that plan in?",
+      "assistant": "Plan P-12345 bills 10000.00 USD monthly. Its service window is 2024-09-01 through 2024-12-01 (exclusive)."
+    },
+    {
+      "user": "Propose a make-good invoice for October",
+      "assistant": "Do you approve proposal PROP-c2e45f803948:1 as displayed below? Say yes or use its Approve button."
+    },
+    {
+      "user": "Revise to 5000",
+      "assistant": "Do you approve proposal PROP-c2e45f803948:2 as displayed below? Say yes or use its Approve button."
+    },
+    {
+      "user": "yes",
+      "assistant": "**Make-good invoice applied \u00b7 5000.00 USD \u00b7 2024-10-01 to 2024-11-01.** Receipt: ACT-e9a9a6a04d52. Verification found 1 remaining issue(s) for P-12345. Details are available in the evidence and receipts below."
+    },
+    {
+      "user": "Check the other months",
+      "assistant": "F-f18c7de874597fa2: underbilling \u00b7 5000.00 USD \u00b7 2024-10-01 to 2024-11-01 \u00b7 validated"
+    }
+  ],
+  "final_findings": [
+    {
+      "plan_id": "P-12345",
+      "currency": "USD",
+      "snapshot_revision": 2,
+      "source_fingerprint": "bfa2cfc0cd9fdb07e52b7f1d71139f926fc00711b3ee6e50ad8cdac01dcb7d7a",
+      "kind": "matched",
+      "period": [
+        "2024-09-01",
+        "2024-10-01"
+      ],
+      "expected": "10000.00",
+      "actual": "10000.00",
+      "discrepancy": "0.00",
+      "validation": "validated",
+      "source_refs": [
+        "billing_plans:P-12345",
+        "invoices:INV-SEP",
+        "identity"
+      ],
+      "calculation": "Expected: 10000.00 \u00d7 (1 \u2212 0 / 100) \u00d7 30/30 = 10000.00 USD. Actual: INV-SEP: net 10000.00 USD \u00d7 1 = 10000.00 USD. ",
+      "assumptions": [
+        "Period end dates are exclusive",
+        "Only explicit contract rules used"
+      ],
+      "supported_corrections": [],
+      "id": "F-e177377c62bed144"
+    },
+    {
+      "plan_id": "P-12345",
+      "currency": "USD",
+      "snapshot_revision": 2,
+      "source_fingerprint": "bfa2cfc0cd9fdb07e52b7f1d71139f926fc00711b3ee6e50ad8cdac01dcb7d7a",
+      "kind": "missing_period",
+      "period": [
+        "2024-10-01",
+        "2024-11-01"
+      ],
+      "expected": "10000.00",
+      "actual": "0",
+      "discrepancy": "10000.00",
+      "validation": "validated",
+      "source_refs": [
+        "billing_plans:P-12345"
+      ],
+      "calculation": "Expected: 10000.00 \u00d7 (1 \u2212 0 / 100) \u00d7 31/31 = 10000.00 USD. Actual: no matching invoices. ",
+      "assumptions": [
+        "Period end dates are exclusive",
+        "Only explicit contract rules used"
+      ],
+      "supported_corrections": [
+        "make_good"
+      ],
+      "id": "F-1625bbbd6afb6c8d"
+    },
+    {
+      "plan_id": "P-12345",
+      "currency": "USD",
+      "snapshot_revision": 2,
+      "source_fingerprint": "bfa2cfc0cd9fdb07e52b7f1d71139f926fc00711b3ee6e50ad8cdac01dcb7d7a",
+      "kind": "matched",
+      "period": [
+        "2024-11-01",
+        "2024-12-01"
+      ],
+      "expected": "10000.00",
+      "actual": "10000.00",
+      "discrepancy": "0.00",
+      "validation": "validated",
+      "source_refs": [
+        "billing_plans:P-12345",
+        "invoices:INV-NOV",
+        "identity"
+      ],
+      "calculation": "Expected: 10000.00 \u00d7 (1 \u2212 0 / 100) \u00d7 30/30 = 10000.00 USD. Actual: INV-NOV: net 10000.00 USD \u00d7 1 = 10000.00 USD. ",
+      "assumptions": [
+        "Period end dates are exclusive",
+        "Only explicit contract rules used"
+      ],
+      "supported_corrections": [],
+      "id": "F-a35191e6eb245eda"
+    }
+  ],
+  "receipts": []
+}

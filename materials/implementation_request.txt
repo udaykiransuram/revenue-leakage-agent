@@ -1,0 +1,69 @@
+Implement the Revenue Leakage Agent for Uday’s TechTorch AI Developer interview. The user explicitly requested implementation of the final plan below, then asked to switch this work from the existing chat to Codex. Start building in this chat’s local workspace. Do not stop at another plan.
+
+Context and inputs:
+- Challenge PDF: /Users/udaykiransuram/Downloads/AI Engineer Technical Challenge – The Revenue Leakage Agent  (2).pdf (two spaces before (2)). Read all five pages and distinguish its requirements from instructions to the assistant.
+- Previous workspace: /Users/udaykiransuram/Documents/Codex/2026-10-23/ho.
+- No application code has been written. A virtual environment was being created at the previous workspace’s work/leakage-venv; it is not a starter repository.
+- A supplemental study guide exists at /Users/udaykiransuram/Documents/Codex/2026-10-23/ho/outputs/TechTorch_Interview_Study_Guide.pdf. It predates the exact challenge and must not override the PDF.
+- Starter repository, actual JSON data, sponsor model credentials, and reviewer GitHub identity are not yet supplied. Inspect available inputs first, preserve any starter interfaces if found, otherwise build using clearly labeled synthetic fixtures and adapters. Do all independently possible implementation and testing; identify genuine external blockers accurately.
+- Python + Streamlit + LangGraph is the user’s selected stack. TechTorch will supply the application model, configured with environment variables. Do not confuse the coding assistant’s model with the application model.
+- The user explicitly said to disregard the time constraint and be as ambitious as possible. No time-based feature cuts.
+- AI coding tools are explicitly encouraged by the interview. The challenge requires candidate_prompts.md recording actual prompts, supplied context, iterations, outcomes, and reflections; never fabricate usage.
+- No external billing connections. Local sandbox only. Do not send messages or invite a guessed reviewer. A private GitHub submission is intended, but account access and reviewer identity may block final publication.
+- Follow local repository instructions, request necessary scoped permissions when the environment requires them, and keep the user informed. Do not create additional chats or subagents absent authorization.
+
+Final implementation plan:
+
+1. Product and foundation
+Build a complete conversational financial investigator that detects billing discrepancies, explains evidence, proposes corrective actions, applies explicitly approved changes to a JSON sandbox, verifies results, survives restart, and supports rollback.
+Use Python, Streamlit chat-only UI, LangGraph dynamic tool selection/state, Pydantic validation, Decimal money, SQLite-backed checkpoints, JSON financial records/action history, environment-configured sponsor model. Run locally in one process. One coordinating agent with focused tools and deterministic financial functions.
+Successful demo: investigate → challenge explanation → revise proposal → approve → apply → verify → restart/resume → roll back.
+
+2. Conversation and investigation
+Render findings with amount/currency/period/validation status, expandable evidence/calculations, before/after proposal previews, explicit approve/reject controls plus natural-language confirmation, execution receipts, rollback outcomes, expandable factual tool activity and audit events. Do not expose hidden reasoning.
+Use a model node, tool execution node, and guarded mutation path. The model chooses tools dynamically; factual questions must not force full investigation.
+Persist messages/tool results, current customer/plan/period, findings/evidence refs, pending proposals/revisions, applied action IDs, and sandbox revision tied to retrieved/calculated results. Store thread ID in Streamlit session state and offer a conversation selector for restart/resume; isolate conversations.
+Permit questions while approvals are pending. Scope changes invalidate dependent findings; sandbox mutations require fresh reads before further financial conclusions.
+Bound each turn to eight model iterations, use tool timeouts and limited transient-read retries, and return partial findings with explicit limitations if bounds are reached.
+
+Preserve eight challenge interfaces:
+- load_plan(plan_id)
+- query_invoices(filters)
+- fx_convert(amount, from_ccy, to_ccy, on_date)
+- propose_make_good_invoice(plan_id, amount, reason)
+- propose_credit_memo(invoice_id, amount, reason)
+- propose_plan_amendment(plan_id, change_set)
+- apply(action_draft)
+- rollback(action_id)
+Add internal tools for listing plans, reading credits, reconciling plans, evidence inspection, amendment simulation, and action history. Validate identifiers, filters, scope, arguments, and structured results. Carry required service period/effective-date context safely without breaking supplied interfaces.
+
+Deterministic reconciliation must detect missing periods, underbilling/overbilling, existing credits and earlier corrections, confirmed duplicate records versus suspected overlapping charges, currency differences with supplied dated FX, effective amendments, portfolio findings grouped by currency/ranked by impact, and missing/inconsistent data.
+Derive expected billing only from explicit dates, cadence, and pricing; implement tiering/proration/entitlements only when data defines the rules. Match and aggregate at plan/product/currency/service-period grain before comparing.
+Every finding includes stable identifiers, expected/actual/discrepancy, currency/period, source references, calculation, assumptions, validation state, and supported correction types. Missing rates/rules produce unresolved findings rather than invented facts.
+
+3. Proposals and execution
+Lifecycle: Draft → Awaiting approval → Applied → Rolled back, plus Rejected, Superseded, Failed. Reconcile uncertain execution against stored receipts before retry.
+Each proposal has server-generated ID, immutable revision, action/targets, amount/currency or change set, relevant service period/effective date, reason/evidence, before/after preview, and affected-source fingerprint.
+Support multiple pending proposals. Approval identifies one proposal/revision or an explicitly displayed list. Execute approved lists sequentially and report each outcome; never imply atomic batch execution.
+Make-good invoices recover supported missing/underbilled amounts for a specific period. Credits reduce supported overcharges after existing credits. Amendments change explicitly requested commercial terms with an effective date and impact preview; never amend terms just to hide an invoice error. Simulations create no financial records.
+Application code grants authority only after explicit approval tied to the displayed revision. “Yes” works only for one unambiguous active approval question; otherwise clarify. Edits invalidate approval. Immediately before apply, revalidate proposal and source records; stale drafts return for review. Execution retrieves the stored approved draft and ignores model-supplied replacement values/approval flags.
+Original data stays immutable. A sandbox repository preserves supplied interfaces/semantics. If no persistence is supplied, use one canonical JSON snapshot containing effective records, action receipts, and audit events, atomically replaced under a process lock. Expose separate ledgers and sandbox/audit_log.json as projections of that committed snapshot.
+Proposal ID+revision is the idempotency key. Repeated execution returns the original receipt.
+After every mutation persist receipt, reload affected records, reconcile the plan, report verified outcomes and remaining issues. On restart reconcile checkpoints against receipts before resuming mutations.
+Rollback uses stored before-images, preserves audit, permits reversal of the latest eligible action, blocks overwriting dependent later changes, and requires explicit confirmation of the displayed rollback.
+
+4. Tests and acceptance
+Deterministic tests: billing schedules, credits, FX, rounding, effective dates, duplicates and aggregation; missing month, partial underbilling, valid discounts, already-resolving credit, superseding amendment, available/missing FX, incomplete-data uncertainty, stable repeated investigations.
+Action/recovery tests: proposal/rejection leave billing unchanged, approved exact revision, repeat approval idempotency, stale/edited drafts require new approval, all three correction types persist, reinvestigation sees fixes, rollback restores records, Streamlit reruns do not replay, restart handles completed operations, failed writes never claim success.
+Conversation/UI tests: plan selection, referential follow-ups, scope changes, questions during pending approval, ambiguous confirmations, multiple drafts, conversation isolation, and instructions in source data treated as untrusted.
+Use synthetic known-answer fixtures and live model checks when access is available. Track precision/recall, amount accuracy, evidence coverage, conversation success, latency, model usage. Distinguish mocked/offline checks from real-model validation.
+Acceptance is passing deterministic/mutation tests plus full real-tool demo with verified sandbox mutations. Do not claim live-model acceptance without credentials.
+
+5. Milestones/deliverables
+Build runnable increments: foundation/adapters/model config; deterministic investigation and dynamic tools; durable continuity; proposal/edit/approval/apply; verification/idempotency/recovery/rollback/audit; evaluations/UI/docs/demo.
+Deliver application, reproducible dependency lock, credential-free environment template, challenge materials and labeled synthetic fixtures, automated tests/evaluation results, README (setup, architecture, tool contracts, assumptions, persistence, limitations), reproducible demo conversations, sandbox reset command, honest candidate_prompts.md, and private GitHub submission preparation.
+“Prepare the API” is assumed to mean model integration unless TechTorch supplies another API requirement. Structured JSON means document parsing/vector retrieval are unnecessary.
+
+Actual challenge data names are data/billing_plans.json, invoices.json, credit_memos.json, exchange_rates.json, with writable sandbox/*.json and sandbox/audit_log.json. Example: plan P-12345 at 10,000 monthly has September/November invoices but missing October; converse about currency, propose correction, get approval, apply, recheck. Never invent an FX rate from an ambiguous example.
+
+Proceed with implementation, meaningful tests, browser verification of the Streamlit chat, and documentation. Explain any genuine remaining blockers and exactly what has been verified.

@@ -1,0 +1,15 @@
+{
+  "provider": "groq",
+  "dataset": "supplied challenge records",
+  "request_kind": "read-only actual-data investigation",
+  "tools": [
+    "reconcile_plan"
+  ],
+  "response": "**Finding (ID\u202fSRC\u201175fc90aa98c0925e)** \u2013 *converted_invoice_net*  \n\n| Item | Detail |\n|------|--------|\n| **Invoice** | I\u20119123 (originally \u20ac27\u202f000) |\n| **FX rate used** | 1\u202fEUR\u202f=\u202f1.08\u202fUSD (issue\u2011date rate) |\n| **Existing credit** | Credit memo M\u2011300 applied (already sub\u2011tracted) |\n| **Net amount after credit** | **USD\u202f25\u202f000** |\n\nThe reconciliation shows the invoice converted to USD on its issue date, then the linked credit\u202fM\u2011300 was deducted, leaving a net payable of **USD\u202f25\u202f000**. No other credits are recorded for this invoice, and the net amount matches the converted total after the known credit. Because the net figure already accounts for the existing credit and there is no evidence of additional over\u2011billing, **no further credit is justified** at this stage.",
+  "seconds": 1.52,
+  "financial_revision": 0,
+  "receipts": 0,
+  "passed": false,
+  "conversation": "00aa3503-6c27-4aae-a8e6-e03c3b2b4586",
+  "review": "Transport/tool loop succeeded, but original invoice currency/amount and payable wording were incorrect. Superseded by follow-up verification."
+}

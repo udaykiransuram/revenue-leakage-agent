@@ -1,0 +1,32 @@
+{
+  "model": "qwen3.5:9b-q4_K_M",
+  "configured_context_tokens": 131072,
+  "actual_input_tokens": 81039,
+  "response": "CEDAR-MOON-7391",
+  "expected_marker": "CEDAR-MOON-7391",
+  "passed": true,
+  "latency_seconds": 550.57,
+  "loaded_models": [
+    {
+      "name": "qwen3.5:9b-q4_K_M",
+      "model": "qwen3.5:9b-q4_K_M",
+      "size": 9760585809,
+      "digest": "56671c2ab9385f9cfcb404638e32cd62d88e3501d44822208363c010179a3c90",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "qwen35",
+        "families": [
+          "qwen35"
+        ],
+        "parameter_size": "9.0B",
+        "quantization_level": "Q4_K_M"
+      },
+      "expires_at": "2026-10-23T15:01:09.170254+05:30",
+      "size_vram": 9760585809,
+      "context_length": 131072,
+      "runner": "llamacpp"
+    }
+  ],
+  "scope": "one synthetic >32K retention check; not a full-window quality benchmark"
+}
